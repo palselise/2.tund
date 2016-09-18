@@ -6,6 +6,8 @@
 	
 	$signupEmailError = "";
 	$signupPasswordError = "";
+	$loginEmailError = "";
+	$loginPasswordError = "";
 	
 	//kas e-post oli olemas
 	if (isset ($_POST["signupEmail"]) ){ //kas keegi nuppu vajutas, kas signupEmail tekkis
@@ -23,6 +25,13 @@
 			if (strlen($_POST["signupPassword"]) < 8){ //strlen- stringi pikkus
 				$signupPasswordError = "Parool peab olema vähemalt 8 tähemärki pikk!";
 			}
+		}
+	}
+	
+	if (isset ($_POST["loginEmail"]) ){
+		if (empty ($_POST["loginEmail"]) ){ //oli email, kuid see oli tühi
+			//echo "email oli tühi";
+			$signupEmailError = "Palun sisesta epost!";		
 		}
 	}
 ?>

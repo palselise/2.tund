@@ -2,7 +2,7 @@
 	$firstName = "Elise";
 	$lastName = "Pals";
 	
-	// echo tr¸kib v‰lja muutuja v‰‰rtuse
+	// echo tr√ºkib v√§lja muutuja v√§√§rtuse
 	// echo $firstName;
 	// echo $lastName;
 	
@@ -15,11 +15,11 @@
 	$age = 22;
 	
 	if ($age < 18){
-		// kui vastus on tıene (true)	
+		// kui vastus on t√µene (true)	
 		echo "alaealine";
 	} else {
-		// kui vastus on v‰‰r (false)
-		echo "t‰isealine";
+		// kui vastus on v√§√§r (false)
+		echo "t√§isealine";
 	}
 ?>
 
@@ -30,7 +30,7 @@
 		//echo "palju ";
 		echo $i."palju ";
 	}
-	echo "ınne";
+	echo "√µnne";
 ?>
 
 <br>
