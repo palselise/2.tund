@@ -4,15 +4,29 @@
 	//echo "<br>";
 	//var_dump($_POST);
 	
-	$signupEmailError = "";
-	$signupPasswordError = "";
 	$loginEmailError = "";
 	$loginPasswordError = "";
+	$signupEmailError = "";
+	$signupPasswordError = "";
+	$firstNameError = "";
+	$lastNameError = "";
+
+
 	
-	//kas e-post oli olemas
-	if (isset ($_POST["signupEmail"]) ){ //kas keegi nuppu vajutas, kas signupEmail tekkis
-		if (empty ($_POST["signupEmail"]) ){ //oli email, kuid see oli tühi
-			//echo "email oli tühi";
+	if (isset ($_POST["loginEmail"]) ){
+		if (empty ($_POST["loginEmail"]) ){
+			$loginEmailError = "Palun sisesta e-post!";		
+		}
+	}
+	
+	if (isset ($_POST["loginPassword"]) ){ 
+		if (empty ($_POST["loginPassword"]) ){ 
+			$loginPasswordError = "Palun sisesta parool!";		
+		}
+	}
+	
+	if (isset ($_POST["signupEmail"]) ){ 
+		if (empty ($_POST["signupEmail"]) ){ 
 			$signupEmailError = "See väli on kohustuslik!";		
 		}
 	}
@@ -21,19 +35,33 @@
 		if (empty ($_POST["signupPassword"]) ){ 
 			$signupPasswordError = "See väli on kohustuslik!";		
 		} else {
-			//tean, et oli parool ja see ei olnud tühi
-			if (strlen($_POST["signupPassword"]) < 8){ //strlen- stringi pikkus
+			if (strlen($_POST["signupPassword"]) < 8){
 				$signupPasswordError = "Parool peab olema vähemalt 8 tähemärki pikk!";
 			}
 		}
 	}
 	
-	if (isset ($_POST["loginEmail"]) ){
-		if (empty ($_POST["loginEmail"]) ){ //oli email, kuid see oli tühi
-			//echo "email oli tühi";
-			$signupEmailError = "Palun sisesta epost!";		
+	if (isset ($_POST["firstName"]) ){
+		if (empty ($_POST["firstName"]) ){
+			$firstNameError = "See väli on kohustuslik!";		
+		} else {
+			//The preg_match() function searches a string for pattern, returning true if the pattern exists, and false otherwise.
+			if (!preg_match("/^[a-zA-Z õäöüšž-]*$/",$_POST["firstName"])) { 
+				$firstNameError = "Pole nimi!"; 
+			}
 		}
 	}
+	
+	if (isset ($_POST["lastName"]) ){
+		if (empty ($_POST["lastName"]) ){
+			$lastNameError = "See väli on kohustuslik!";		
+		} else {
+			if (!preg_match("/^[a-zA-Z õäöüšž-]*$/",$_POST["lastName"])) { 
+				$lastNameError = "Pole nimi!"; 
+			}
+		}
+	}
+	
 ?>
 
 <!DOCTYPE html>
@@ -45,10 +73,10 @@
 		<h1>Logi sisse</h1>	
 		
 		<form method="POST">
-			<input name="loginEmail" type="email" placeholder="E-post">
+			<input name="loginEmail" type="email" placeholder="E-post"> <?php echo $loginEmailError; ?>
 			<br><br>
 			
-			<input name="loginPassword" type="password" placeholder="Parool">
+			<input name="loginPassword" type="password" placeholder="Parool"> <?php echo $loginPasswordError; ?>
 			<br><br>
 			
 			<input type="submit" value = "Logi sisse">
@@ -67,8 +95,22 @@
 			<input name="signupPassword" type="password"> <?php echo $signupPasswordError; ?>
 			<br><br>
 			
+			<label>Eesnimi</label>
+			<br>
+			<input name="firstName" type="text"> <?php echo $firstNameError; ?>
+			<br><br>
+			
+			<label>Perekonnanimi</label>
+			<br>
+			<input name="lastName" type="text"> <?php echo $lastNameError; ?>
+			<br><br>
+		
+			<label>Sugu:</label>
+			<input type="radio" name="gender" value="female">Naine
+			<input type="radio" name="gender" value="male">Mees
+			<br><br>
+			
 			<input type="submit" value = "Loo kasutaja">
 		</form>
-
-	</body>
+		 <!--Mvp ideeks on teha treeningu päeviku rakendus. Kasutajal on võimalik rakendusse sisestada millal treenis, kui kaua, millist lihasrühma (soovi korral ka konkreetselt harjutusi).-->
 </html>
